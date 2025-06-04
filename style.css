@@ -1,0 +1,69 @@
+        .product-card {
+            transition: transform 0.2s ease-in-out;
+            height: 100%;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .product-image {
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+        }
+        .cart-badge {
+            position: relative;
+            top: -8px;
+            right: -8px;
+        }
+        .price-tag {
+            font-weight: 600;
+            color: #28a745;
+            font-size: 1.2rem;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #28a745 !important;
+        }
+        .btn-whatsapp {
+            background-color: #25D366;
+            border-color: #25D366;
+            color: white;
+        }
+        .btn-whatsapp:hover {
+            background-color: #1DA851;
+            border-color: #1DA851;
+            color: white;
+        }
+        .empty-cart {
+            text-align: center;
+            padding: 3rem 0;
+            color: #6c757d;
+        }
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #dee2e6;
+            background: white;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .quantity-btn:hover {
+            background-color: #f8f9fa;
+        }
+        .quantity-input {
+            width: 60px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 0.25rem;
+        }
+    
