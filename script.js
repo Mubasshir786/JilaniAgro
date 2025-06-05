@@ -1,9 +1,9 @@
-// Product data without discounts
-    const products = [
+ // Product data without discounts
+    let products = [
       {
         id: 1,
         name: "Uria 100 - Premium Nitrogen Fertilizer",
-        image: "product.png",
+        image: "./images/product.png",
         basePrice: 45,
         category: "Fertilizer",
         description: "High-purity nitrogen fertilizer for enhanced plant growth and green foliage.",
@@ -16,7 +16,7 @@
       {
         id: 2,
         name: "Agro Acharya - Complete Plant Food",
-        image: "product.png",
+        image: "./images/product.png",
         basePrice: 80,
         category: "Plant Food",
         description: "Balanced nutrient formula for all stages of plant growth.",
@@ -29,7 +29,7 @@
       {
         id: 3,
         name: "Ts Agri Organic Fertilizer",
-        image: "product.png",
+        image: "./images/product.png",
         basePrice: 1140,
         category: "Organic",
         description: "100% organic fertilizer for sustainable farming practices.",
@@ -42,7 +42,7 @@
       {
         id: 4,
         name: "Pancha Ghavya - Liquid Fertilizer",
-        image: "product.png",
+        image: "./images/product.png",
         basePrice: 50,
         category: "Liquid Fertilizer",
         description: "Traditional Indian liquid fertilizer made from five cow products.",
@@ -55,7 +55,7 @@
       {
         id: 5,
         name: "Aries Agromin Max - Soil Enhancer",
-        image: "product.png",
+        image: "./images/product.png",
         basePrice: 294,
         category: "Soil Conditioner",
         description: "Improves soil structure and nutrient retention capacity.",
@@ -68,88 +68,10 @@
       {
         id: 6,
         name: "Aries Fertisol - Complete Nutrition",
-        image: "product.png",
+        image: "./images/product.png",
         basePrice: 2789,
         category: "Fertilizer",
         description: "Complete NPK formula with essential micronutrients.",
-        sizes: [
-          { size: "1kg", multiplier: 1 },
-          { size: "5kg", multiplier: 4.5 },
-          { size: "10kg", multiplier: 8.5 }
-        ]
-      },
-      {
-        id: 7,
-        name: "Granulated Organic Fertilizer",
-        image: "product.png",
-        basePrice: 90,
-        category: "Organic",
-        description: "Slow-release organic fertilizer granules for sustained nutrition.",
-        sizes: [
-          { size: "1kg", multiplier: 1 },
-          { size: "5kg", multiplier: 4.5 },
-          { size: "10kg", multiplier: 8.5 }
-        ]
-      },
-      {
-        id: 8,
-        name: "YaraTera NPK 12:61:00",
-        image: "product.png",
-        basePrice: 3899,
-        category: "Fertilizer",
-        description: "High-phosphorus fertilizer for root development and flowering.",
-        sizes: [
-          { size: "1kg", multiplier: 1 },
-          { size: "5kg", multiplier: 4.5 },
-          { size: "10kg", multiplier: 8.5 }
-        ]
-      },
-      {
-        id: 9,
-        name: "Grow++ - Plant Growth Booster",
-        image: "product.png",
-        basePrice: 500,
-        category: "Growth Enhancer",
-        description: "Advanced formula to stimulate plant growth and increase yield.",
-        sizes: [
-          { size: "1L", multiplier: 1 },
-          { size: "5L", multiplier: 4.5 },
-          { size: "10L", multiplier: 8.5 }
-        ]
-      },
-      {
-        id: 10,
-        name: "Soil Gold - Premium Soil Conditioner",
-        image: "product.png",
-        basePrice: 500,
-        category: "Soil Conditioner",
-        description: "Enhances soil fertility and water retention capacity.",
-        sizes: [
-          { size: "500g", multiplier: 1 },
-          { size: "1kg", multiplier: 1.8 },
-          { size: "5kg", multiplier: 4.5 }
-        ]
-      },
-      {
-        id: 11,
-        name: "Potaaz++ - Potassium Rich Fertilizer",
-        image: "product.png",
-        basePrice: 500,
-        category: "Fertilizer",
-        description: "High-potassium formula for fruit development and disease resistance.",
-        sizes: [
-          { size: "1kg", multiplier: 1 },
-          { size: "5kg", multiplier: 4.5 },
-          { size: "10kg", multiplier: 8.5 }
-        ]
-      },
-      {
-        id: 12,
-        name: "Organic Fertilizer - Natural Plant Food",
-        image: "product.png",
-        basePrice: 100,
-        category: "Organic",
-        description: "All-natural plant food for organic farming practices.",
         sizes: [
           { size: "1kg", multiplier: 1 },
           { size: "5kg", multiplier: 4.5 },
@@ -160,12 +82,45 @@
 
     let cart = [];
     let currentSort = 'default';
+    let nextProductId = 7;
+    let adminLoggedIn = false;
+    const ADMIN_USERNAME = "admin";
+    const ADMIN_PASSWORD = "admin123";
 
     // Initialize the app
     function init() {
       loadCart();
+      loadProducts();
       displayProducts();
       updateCartCount();
+      updateSizeInputs();
+    }
+
+    // Load products from localStorage
+    function loadProducts() {
+      try {
+        const storedProducts = localStorage.getItem('jilaniAgroProducts');
+        if (storedProducts) {
+          const parsed = JSON.parse(storedProducts);
+          products = parsed.products;
+          nextProductId = parsed.nextId;
+        }
+      } catch (error) {
+        console.log('Error loading products from localStorage');
+      }
+    }
+
+    // Save products to localStorage
+    function saveProducts() {
+      try {
+        const data = {
+          products: products,
+          nextId: nextProductId
+        };
+        localStorage.setItem('jilaniAgroProducts', JSON.stringify(data));
+      } catch (error) {
+        console.log('Error saving products to localStorage');
+      }
     }
 
     // Display products
@@ -345,6 +300,7 @@
     function showCart() {
       document.getElementById('products-section').style.display = 'none';
       document.getElementById('cart-section').style.display = 'block';
+      document.getElementById('admin-section').style.display = 'none';
       displayCartItems();
     }
 
@@ -352,6 +308,7 @@
     function showProducts() {
       document.getElementById('cart-section').style.display = 'none';
       document.getElementById('products-section').style.display = 'block';
+      document.getElementById('admin-section').style.display = 'none';
     }
 
     // Display cart items
@@ -509,6 +466,208 @@
       } catch (error) {
         console.log('Error loading cart from localStorage');
         cart = [];
+      }
+    }
+    
+    // ADMIN FUNCTIONS
+    
+    // Show admin login modal
+    function showAdminLogin() {
+      document.getElementById('admin-login-modal').style.display = 'block';
+    }
+    
+    // Hide admin login modal
+    function hideAdminLogin() {
+      document.getElementById('admin-login-modal').style.display = 'none';
+    }
+    
+    // Admin login
+    function adminLogin(event) {
+      event.preventDefault();
+      const username = document.getElementById('admin-username').value;
+      const password = document.getElementById('admin-password').value;
+      
+      if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+        adminLoggedIn = true;
+        hideAdminLogin();
+        showAdminPanel();
+      } else {
+        showToast('Invalid admin credentials!');
+      }
+    }
+    
+    // Admin logout
+    function adminLogout() {
+      adminLoggedIn = false;
+      showProducts();
+    }
+    
+    // Show admin panel
+    function showAdminPanel() {
+      document.getElementById('products-section').style.display = 'none';
+      document.getElementById('cart-section').style.display = 'none';
+      document.getElementById('admin-section').style.display = 'block';
+      updateAdminProductsList();
+    }
+    
+    // Add size input fields
+    function addSizeInput() {
+      const sizeContainer = document.getElementById('size-container');
+      const sizeId = Date.now();
+      
+      const sizeDiv = document.createElement('div');
+      sizeDiv.className = 'size-controls';
+      sizeDiv.innerHTML = `
+        <div class="size-inputs">
+          <input type="text" class="form-control" placeholder="Size (e.g., 1kg)" required>
+          <input type="number" class="form-control" placeholder="Multiplier" min="0.1" step="0.1" required>
+        </div>
+        <button type="button" class="btn-remove-size" onclick="removeSizeInput(this)">
+          <i class="fas fa-times"></i>
+        </button>
+      `;
+      
+      sizeContainer.appendChild(sizeDiv);
+    }
+    
+    // Remove size input
+    function removeSizeInput(button) {
+      button.closest('.size-controls').remove();
+    }
+    
+    // Update size inputs on page load
+    function updateSizeInputs() {
+      const sizeContainer = document.getElementById('size-container');
+      sizeContainer.innerHTML = `
+        <div class="size-controls">
+          <div class="size-inputs">
+            <input type="text" class="form-control" placeholder="Size (e.g., 1kg)" required>
+            <input type="number" class="form-control" placeholder="Multiplier" min="0.1" step="0.1" required>
+          </div>
+        </div>
+      `;
+    }
+    
+    // Handle image preview
+    document.getElementById('product-image').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const preview = document.getElementById('image-preview');
+          preview.src = event.target.result;
+          preview.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+    
+    // Add product to the store
+    function addProduct(event) {
+      event.preventDefault();
+      
+      // Get form values
+      const name = document.getElementById('product-name').value;
+      const category = document.getElementById('product-category').value;
+      const basePrice = parseFloat(document.getElementById('product-price').value);
+      const description = document.getElementById('product-description').value;
+      const imageFile = document.getElementById('product-image').files[0];
+      
+      // Get sizes
+      const sizes = [];
+      const sizeControls = document.querySelectorAll('.size-controls');
+      sizeControls.forEach(control => {
+        const inputs = control.querySelectorAll('input');
+        const size = inputs[0].value;
+        const multiplier = parseFloat(inputs[1].value);
+        
+        if (size && multiplier) {
+          sizes.push({ size, multiplier });
+        }
+      });
+      
+      // Validate inputs
+      if (!name || !category || isNaN(basePrice)) {
+        showToast('Please fill all required fields!');
+        return;
+      }
+      
+      if (!imageFile) {
+        showToast('Please select a product image!');
+        return;
+      }
+      
+      if (sizes.length === 0) {
+        showToast('Please add at least one size option!');
+        return;
+      }
+      
+      // Process image
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const newProduct = {
+          id: nextProductId++,
+          name,
+          image: event.target.result,
+          basePrice,
+          category,
+          description,
+          sizes
+        };
+        
+        // Add to products array
+        products.push(newProduct);
+        
+        // Save to localStorage
+        saveProducts();
+        
+        // Reset form
+        document.getElementById('product-form').reset();
+        document.getElementById('image-preview').style.display = 'none';
+        updateSizeInputs();
+        
+        // Show success message
+        showToast(`${name} added successfully!`);
+        
+        // Update products list
+        updateAdminProductsList();
+      };
+      
+      reader.readAsDataURL(imageFile);
+    }
+    
+    // Update admin products list
+    function updateAdminProductsList() {
+      const list = document.getElementById('admin-products-list');
+      list.innerHTML = '';
+      
+      products.forEach(product => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${product.id}</td>
+          <td>${product.name}</td>
+          <td>${product.category}</td>
+          <td>₹${product.basePrice}</td>
+          <td>
+            <button class="btn btn-sm btn-danger" onclick="deleteProduct(${product.id})">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          </td>
+        `;
+        list.appendChild(row);
+      });
+    }
+    
+    // Delete product
+    function deleteProduct(productId) {
+      if (confirm('Are you sure you want to delete this product?')) {
+        const index = products.findIndex(p => p.id === productId);
+        if (index !== -1) {
+          products.splice(index, 1);
+          saveProducts();
+          updateAdminProductsList();
+          showToast('Product deleted successfully!');
+        }
       }
     }
 
