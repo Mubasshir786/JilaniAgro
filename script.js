@@ -3,7 +3,7 @@
       {
         id: 1,
         name: "Uria 100 - Premium Nitrogen Fertilizer",
-        image: "./images/product.png",
+        image: "product.png",
         basePrice: 45,
         category: "Fertilizer",
         description: "High-purity nitrogen fertilizer for enhanced plant growth and green foliage.",
@@ -16,7 +16,7 @@
       {
         id: 2,
         name: "Agro Acharya - Complete Plant Food",
-        image: "./images/product.png",
+        image: "product.png",
         basePrice: 80,
         category: "Plant Food",
         description: "Balanced nutrient formula for all stages of plant growth.",
@@ -29,7 +29,7 @@
       {
         id: 3,
         name: "Ts Agri Organic Fertilizer",
-        image: "./images/product.png",
+        image: "product.png",
         basePrice: 1140,
         category: "Organic",
         description: "100% organic fertilizer for sustainable farming practices.",
@@ -42,7 +42,7 @@
       {
         id: 4,
         name: "Pancha Ghavya - Liquid Fertilizer",
-        image: "./images/product.png",
+        image: "product.png",
         basePrice: 50,
         category: "Liquid Fertilizer",
         description: "Traditional Indian liquid fertilizer made from five cow products.",
@@ -55,7 +55,7 @@
       {
         id: 5,
         name: "Aries Agromin Max - Soil Enhancer",
-        image: "./images/product.png",
+        image: "product.png",
         basePrice: 294,
         category: "Soil Conditioner",
         description: "Improves soil structure and nutrient retention capacity.",
@@ -68,7 +68,7 @@
       {
         id: 6,
         name: "Aries Fertisol - Complete Nutrition",
-        image: "./images/product.png",
+        image: "product.png",
         basePrice: 2789,
         category: "Fertilizer",
         description: "Complete NPK formula with essential micronutrients.",
@@ -81,7 +81,7 @@
       {
         id: 7,
         name: "Granulated Organic Fertilizer",
-        image: "./images/product.png",
+        image: "product.png",
         basePrice: 90,
         category: "Organic",
         description: "Slow-release organic fertilizer granules for sustained nutrition.",
@@ -94,7 +94,7 @@
       {
         id: 8,
         name: "YaraTera NPK 12:61:00",
-        image: "./images/product.png",
+        image: "product.png",
         basePrice: 3899,
         category: "Fertilizer",
         description: "High-phosphorus fertilizer for root development and flowering.",
@@ -107,7 +107,7 @@
       {
         id: 9,
         name: "Grow++ - Plant Growth Booster",
-        image: "./images/product.png",
+        image: "product.png",
         basePrice: 500,
         category: "Growth Enhancer",
         description: "Advanced formula to stimulate plant growth and increase yield.",
@@ -120,7 +120,7 @@
       {
         id: 10,
         name: "Soil Gold - Premium Soil Conditioner",
-        image: "./images/product.png",
+        image: "product.png",
         basePrice: 500,
         category: "Soil Conditioner",
         description: "Enhances soil fertility and water retention capacity.",
@@ -133,7 +133,7 @@
       {
         id: 11,
         name: "Potaaz++ - Potassium Rich Fertilizer",
-        image: "./images/product.png",
+        image: "product.png",
         basePrice: 500,
         category: "Fertilizer",
         description: "High-potassium formula for fruit development and disease resistance.",
@@ -146,7 +146,7 @@
       {
         id: 12,
         name: "Organic Fertilizer - Natural Plant Food",
-        image: "./images/product.png",
+        image: "product.png",
         basePrice: 100,
         category: "Organic",
         description: "All-natural plant food for organic farming practices.",
