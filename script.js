@@ -1,4 +1,4 @@
- // Product data without discounts
+
     let products = [
       {
         id: 1,
