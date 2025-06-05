@@ -4,10 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jilani Agro - Premium Farm Products</title>
-  <link rel="icon" href="fevicon_icon.png" type="image/x-icon">
+  <link rel="icon" href="./images/fevicon_icon.png" type="image/x-icon">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Navigation -->
@@ -102,6 +101,96 @@
         </div>
       </div>
     </div>
+
+    <!-- Admin Panel Section -->
+    <div id="admin-section">
+      <div class="admin-panel">
+        <div class="admin-header">
+          <h2><i class="fas fa-tools me-2"></i>Admin Product Management</h2>
+          <div>
+            <button class="btn btn-admin me-2" onclick="showProducts()">
+              <i class="fas fa-store me-2"></i>View Store
+            </button>
+            <button class="btn btn-admin btn-admin-logout" onclick="adminLogout()">
+              <i class="fas fa-sign-out-alt me-2"></i>Logout
+            </button>
+          </div>
+        </div>
+        
+        <div class="mb-4">
+          <h4 class="mb-3">Add New Product</h4>
+          <form id="product-form" onsubmit="addProduct(event)">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="product-name">Product Name</label>
+                  <input type="text" class="form-control" id="product-name" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="product-category">Category</label>
+                  <input type="text" class="form-control" id="product-category" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="product-price">Base Price (₹)</label>
+                  <input type="number" class="form-control" id="product-price" min="1" required>
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="product-description">Description</label>
+                  <textarea class="form-control" id="product-description" rows="3" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                  <label for="product-image">Product Image</label>
+                  <input type="file" class="form-control" id="product-image" accept="image/*" required>
+                  <div class="mt-2">
+                    <img id="image-preview" class="preview-image" src="" alt="Image preview" style="display: none;">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Product Sizes</label>
+              <div id="size-container">
+                <!-- Sizes will be added here -->
+              </div>
+              <button type="button" class="btn btn-add-size mt-2" onclick="addSizeInput()">
+                <i class="fas fa-plus me-2"></i>Add Size Option
+              </button>
+            </div>
+            
+            <button type="submit" class="btn btn-admin w-100 py-2">
+              <i class="fas fa-plus-circle me-2"></i>Add Product
+            </button>
+          </form>
+        </div>
+        
+        <div>
+          <h4 class="mb-3">Current Products</h4>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead class="table-primary">
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-products-list">
+                <!-- Products will be listed here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <footer class="pt-4 pb-3">
@@ -155,7 +244,34 @@
       </div>
     </div>
   </footer>
-<script src="script.js"></script>
+
+  <!-- Admin Login Button -->
+  <div class="admin-login-btn" onclick="showAdminLogin()">
+    <i class="fas fa-user-cog"></i>
+  </div>
+
+  <!-- Admin Login Modal -->
+  <div id="admin-login-modal" class="admin-login-modal">
+    <div class="admin-login-content">
+      <div class="admin-login-header">
+        <h3><i class="fas fa-lock me-2"></i>Admin Login</h3>
+        <p>Access the product management panel</p>
+      </div>
+      <form onsubmit="adminLogin(event)">
+        <div class="form-group">
+          <label for="admin-username">Username</label>
+          <input type="text" class="form-control" id="admin-username" required>
+        </div>
+        <div class="form-group">
+          <label for="admin-password">Password</label>
+          <input type="password" class="form-control" id="admin-password" required>
+        </div>
+        <button type="submit" class="btn btn-admin w-100 py-2">
+          <i class="fas fa-sign-in-alt me-2"></i>Login
+        </button>
+      </form>
+    </div>
+  </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
